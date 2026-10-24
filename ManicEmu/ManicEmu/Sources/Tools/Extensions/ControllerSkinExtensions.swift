@@ -11,9 +11,9 @@
 import AVFoundation
 
 extension ControllerSkin {
-    func getFrames(traits: ControllerSkin.Traits = ControllerSkin.Traits.defaults(for: UIWindow.applicationWindow ?? UIWindow(frame: .init(origin: .zero, size: R.Size.WindowSize))), scale: CGFloat = 1) -> (skinFrame: CGRect, mainGameViewFrame: CGRect, touchGameViewFrame: CGRect?)? {
+    func getFrames(traits: ControllerSkin.Traits = ControllerSkin.Traits.defaults(for: UIWindow.applicationWindow ?? UIWindow(frame: .init(origin: .zero, size: R.Size.WindowSize))), scale: CGFloat = 1, bounds: CGRect? = nil) -> (skinFrame: CGRect, mainGameViewFrame: CGRect, touchGameViewFrame: CGRect?)? {
         if let screens = self.screens(for: traits), let aspectRatio = self.aspectRatio(for: traits) {
-            var skinFrame = AVMakeRect(aspectRatio: aspectRatio, insideRect: UIScreen.main.bounds).rounded()
+            var skinFrame = AVMakeRect(aspectRatio: aspectRatio, insideRect: bounds ?? UIWindow.applicationWindow?.bounds ?? .zero).rounded()
             if scale != 1 {
                 skinFrame = skinFrame.applying(CGAffineTransform(scaleX: scale, y: scale))
             }

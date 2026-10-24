@@ -81,6 +81,7 @@ class PlayViewController: GameViewController {
     private var shortcutsButtonContainer = ShortcutButtonContainerView()
     //渲染视图
     private var gameMetalView: UIView? = nil
+    private var libretroStartScheduled = false
     //3DS核心
     private var citraCore: ThreeDSEmulatorBridge? = nil
     //JGenesis核心
@@ -952,21 +953,24 @@ class PlayViewController: GameViewController {
         return super.preferredInterfaceOrientationForPresentation
     }
     
+    private var lastSkinLayoutSize: CGSize = .zero
+    private var lastSkinSafeArea: UIEdgeInsets = .zero
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let size = view.bounds.size
+        guard size.width > 0, size.height > 0,
+              size != lastSkinLayoutSize || view.safeAreaInsets != lastSkinSafeArea else { return }
+        lastSkinLayoutSize = size
+        lastSkinSafeArea = view.safeAreaInsets
+        // Also handle window resizing without an orientation transition.
+        updateSkin()
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
         OrientationLockPin.resistPortraitTransitionIfNeeded(to: size)
-        let fromSize = R.Size.WindowSize
-        let toSize = size
-        if manicGame.orientation == .portrait {
-            // Portrait lock: ignore landscape-bound transitions.
-            if fromSize.height > fromSize.width && toSize.height < toSize.width {
-                return
-            }
-        } else if manicGame.orientation == .landscape {
-            // Landscape lock: ignore portrait-bound transitions.
-            if fromSize.height < fromSize.width && toSize.height > toSize.width {
-                return
-            }
-        }
+        // A fold can change the window shape even while orientation is locked.
+        // Keep the emulation session alive and always update its skin geometry.
         UIView.hideAllAlert()
         super.viewWillTransition(to: size, with: coordinator)
         guard UIApplication.shared.applicationState != .background else { return }
@@ -1272,7 +1276,7 @@ extension PlayViewController {
             
             func updateFlex(images: [UIImage?]) {
                 if let controllerSkin = controllerView.controllerSkin, let traits = controllerView.controllerSkinTraits,
-                   let skin = Database.realm.objects(Skin.self).first(where: { $0.identifier == controllerSkin.identifier }) {
+                   let skin = Database.realm.objects(Skin.self).first(where: { $0.identifier == controllerSkin.identifier.components(separatedBy: ".adaptive.v1.")[0] }) {
                     fixedOrientationConfig()
                     let vc = FlexSkinSettingViewController(skin: skin,
                                                            traits: traits,
@@ -2465,6 +2469,10 @@ extension PlayViewController {
                 controllerView.controllerSkin = controllerSkin
                 currentSkinID = skin.id
             } else if var controllerSkin = ControllerSkin.standardControllerSkin(for: manicGame.gameType) {
+                if let adaptive = AdaptiveSkinFactory.make(gameType: manicGame.gameType,
+                    size: view.bounds.size, safeArea: view.safeAreaInsets, swapScreens: manicGame.swapScreen) {
+                    controllerSkin = adaptive
+                }
                 if manicGame.supportSwapScreen {
                     controllerSkin.isSwapScreen = manicGame.swapScreen
                 }
@@ -2482,7 +2490,7 @@ extension PlayViewController {
                 // Same dual-orientation skin may only be stored under the other orientation key.
                 controllerView.updateControllerSkin()
                 
-                if let identifier = controllerView.controllerSkin?.identifier,
+                if let identifier = controllerView.controllerSkin?.identifier.components(separatedBy: ".adaptive.v1.")[0],
                    let skin = Database.realm.objects(Skin.self).where({ $0.identifier == identifier }).first {
                     currentSkinID = skin.id
                 }
@@ -2697,12 +2705,18 @@ extension PlayViewController {
     }
     
     private func updateShortcutsButton() {
+        if controllerView.controllerSkin?.identifier.contains(".adaptive.v1.") == true {
+            shortcutsButtonContainer.isHidden = true
+            return
+        }
+
+        shortcutsButtonContainer.isHidden = false
         shortcutsButtonContainer.subviews.forEach { $0.removeFromSuperview() }
         if (manicGame.gameType == ._3ds && UIDevice.isPad) || manicGame.isAzaharArticBase {
             return
         }
         if let controllerSkin = controllerView.controllerSkin {
-            if let skin = Database.realm.objects(Skin.self).first(where: { $0.identifier == controllerSkin.identifier }) {
+            if let skin = Database.realm.objects(Skin.self).first(where: { $0.identifier == controllerSkin.identifier.components(separatedBy: ".adaptive.v1.")[0] }) {
                 if skin.supportShortcut {
                     //当前使用的是默认皮肤 则添加功能按钮
                     var shortcuts = Prefference.defalut.getPrefference(kind: .gameShortcut,
@@ -2968,8 +2982,14 @@ extension PlayViewController {
             }
             updateDualScreenViews()
         } else {
+            // Skin/layout updates can arrive before the delayed view creation.
+            // Reserve the start now so they cannot queue a second core load.
+            guard !libretroStartScheduled else { return }
+            libretroStartScheduled = true
             DispatchQueue.main.asyncAfter(delay: 0.35) { [weak self] in
                 guard let self = self else { return }
+                defer { self.libretroStartScheduled = false }
+                guard self.gameMetalView == nil else { return }
                 
                 //为了适配PSKM GB GBC GBA的存档路径进行特别处理
                 var customSaveDir: String? = nil

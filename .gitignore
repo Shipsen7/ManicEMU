@@ -115,3 +115,17 @@ Scripts/find_unused_types.py
 
 #vscode
 .vscode
+
+# Local signing, device credentials, and diagnostic exports
++*.mobileprovision
++*.p12
++*.p8
++*.pfx
++*.mobiledevicepairing
++**/pairingFile.plist
++**/pairing*.plist
++*.xcuserstate
++xcuserdata/
++Signing.local.xcconfig
++Diagnostics/
++

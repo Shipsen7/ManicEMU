@@ -184,6 +184,16 @@ class GamesViewController: BaseViewController {
         }
     }
     
+    private var lastLibraryLayoutSize: CGSize = .zero
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let size = view.bounds.size
+        guard size.width > 0, size.height > 0, size != lastLibraryLayoutSize else { return }
+        lastLibraryLayoutSize = size
+        updateViews(isLandscape: size.width > size.height)
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         //侧栏关闭不阻塞视图交接 否则横屏视图会先被压到竖屏宽度再卸载

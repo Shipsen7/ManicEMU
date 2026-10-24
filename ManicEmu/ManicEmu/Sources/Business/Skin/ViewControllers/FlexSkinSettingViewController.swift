@@ -999,11 +999,11 @@ extension FlexSkinSettingViewController {
             let maxWidth = screensContainerView.frame.width
             let maxHeight = screensContainerView.frame.height
             
-            let edgeMinX = UIScreen.main.bounds.minX - screensContainerView.frame.minX
-            let edgeMaxX = UIScreen.main.bounds.width - screensContainerView.frame.maxX
+            let edgeMinX = view.bounds.minX - screensContainerView.frame.minX
+            let edgeMaxX = view.bounds.width - screensContainerView.frame.maxX
             
-            let edgeMinY = UIScreen.main.bounds.minY - screensContainerView.frame.minY
-            let edgeMaxY = UIScreen.main.bounds.height - screensContainerView.frame.maxY
+            let edgeMinY = view.bounds.minY - screensContainerView.frame.minY
+            let edgeMaxY = view.bounds.height - screensContainerView.frame.maxY
             
             // 保证位置在屏幕范围内
             var newFrame = view.frame
@@ -1028,8 +1028,8 @@ extension FlexSkinSettingViewController {
             }
         }
         
-        let maxWidth = UIScreen.main.bounds.width
-        let maxHeight = UIScreen.main.bounds.height
+        let maxWidth = view.bounds.width
+        let maxHeight = view.bounds.height
         
         // 如果视图超出屏幕边界，需要缩小
         if currentFrame.width > maxWidth || currentFrame.height > maxHeight {
@@ -1068,8 +1068,8 @@ extension FlexSkinSettingViewController {
         
         var isFixScreenOutside = false
         
-        let edgeMinX = UIScreen.main.bounds.minX - screensContainerView.frame.minX
-        let edgeMaxX = UIScreen.main.bounds.width - screensContainerView.frame.maxX
+        let edgeMinX = view.bounds.minX - screensContainerView.frame.minX
+        let edgeMaxX = view.bounds.width - screensContainerView.frame.maxX
         
         // Step 1: 超出屏幕边缘 - 调整回可见区域（最高优先）
         if frame.minX < edgeMinX {
@@ -1080,8 +1080,8 @@ extension FlexSkinSettingViewController {
             isFixScreenOutside = true
         }
         
-        let edgeMinY = UIScreen.main.bounds.minY - screensContainerView.frame.minY
-        let edgeMaxY = UIScreen.main.bounds.height - screensContainerView.frame.maxY
+        let edgeMinY = view.bounds.minY - screensContainerView.frame.minY
+        let edgeMaxY = view.bounds.height - screensContainerView.frame.maxY
         
         if frame.minY < edgeMinY {
             finalCenter.y += (-frame.minY + edgeMinY)
@@ -1317,10 +1317,10 @@ extension FlexSkinSettingViewController {
     }
     
     private func clampItemCenter(_ center: CGPoint, size: CGSize) -> CGPoint {
-        let edgeMinX = UIScreen.main.bounds.minX - buttonsContainerView.frame.minX
-        let edgeMaxX = UIScreen.main.bounds.width - buttonsContainerView.frame.maxX
-        let edgeMinY = UIScreen.main.bounds.minY - buttonsContainerView.frame.minY
-        let edgeMaxY = UIScreen.main.bounds.height - buttonsContainerView.frame.maxY
+        let edgeMinX = view.bounds.minX - buttonsContainerView.frame.minX
+        let edgeMaxX = view.bounds.width - buttonsContainerView.frame.maxX
+        let edgeMinY = view.bounds.minY - buttonsContainerView.frame.minY
+        let edgeMaxY = view.bounds.height - buttonsContainerView.frame.maxY
         
         let maxWidth = buttonsContainerView.frame.width
         let maxHeight = buttonsContainerView.frame.height
@@ -1441,10 +1441,10 @@ extension FlexSkinSettingViewController {
                 newWidth = newHeight * state.aspectRatio
             }
             
-            let edgeMinX = UIScreen.main.bounds.minX - buttonsContainerView.frame.minX
-            let edgeMaxX = UIScreen.main.bounds.width - buttonsContainerView.frame.maxX
-            //            let edgeMinY = UIScreen.main.bounds.minY - buttonsContainerView.frame.minY
-            let edgeMaxY = UIScreen.main.bounds.height - buttonsContainerView.frame.maxY
+            let edgeMinX = view.bounds.minX - buttonsContainerView.frame.minX
+            let edgeMaxX = view.bounds.width - buttonsContainerView.frame.maxX
+            //            let edgeMinY = view.bounds.minY - buttonsContainerView.frame.minY
+            let edgeMaxY = view.bounds.height - buttonsContainerView.frame.maxY
             
             let maxWidth = buttonsContainerView.frame.width + edgeMaxX - state.anchor.x
             let maxHeight = buttonsContainerView.frame.height + edgeMaxY - state.anchor.y
@@ -1577,10 +1577,10 @@ extension FlexSkinSettingViewController {
             let maxWidth = buttonsContainerView.frame.width
             let maxHeight = buttonsContainerView.frame.height
             
-            let edgeMinX = UIScreen.main.bounds.minX - buttonsContainerView.frame.minX
-            let edgeMaxX = UIScreen.main.bounds.width - buttonsContainerView.frame.maxX
-            let edgeMinY = UIScreen.main.bounds.minY - buttonsContainerView.frame.minY
-            let edgeMaxY = UIScreen.main.bounds.height - buttonsContainerView.frame.maxY
+            let edgeMinX = view.bounds.minX - buttonsContainerView.frame.minX
+            let edgeMaxX = view.bounds.width - buttonsContainerView.frame.maxX
+            let edgeMinY = view.bounds.minY - buttonsContainerView.frame.minY
+            let edgeMaxY = view.bounds.height - buttonsContainerView.frame.maxY
             
             var newFrame = view.frame
             var newOrigin = newFrame.origin
@@ -1612,8 +1612,8 @@ extension FlexSkinSettingViewController {
             return
         }
         
-        let maxWidth = UIScreen.main.bounds.width
-        let maxHeight = UIScreen.main.bounds.height
+        let maxWidth = view.bounds.width
+        let maxHeight = view.bounds.height
         
         if currentFrame.width > maxWidth || currentFrame.height > maxHeight {
             let widthScale = maxWidth / currentFrame.width
@@ -1640,10 +1640,10 @@ extension FlexSkinSettingViewController {
         var finalCenter = view.center
         var isFixScreenOutside = false
         
-        let edgeMinX = UIScreen.main.bounds.minX - buttonsContainerView.frame.minX
-        let edgeMaxX = UIScreen.main.bounds.width - buttonsContainerView.frame.maxX
-        let edgeMinY = UIScreen.main.bounds.minY - buttonsContainerView.frame.minY
-        let edgeMaxY = UIScreen.main.bounds.height - buttonsContainerView.frame.maxY
+        let edgeMinX = view.bounds.minX - buttonsContainerView.frame.minX
+        let edgeMaxX = view.bounds.width - buttonsContainerView.frame.maxX
+        let edgeMinY = view.bounds.minY - buttonsContainerView.frame.minY
+        let edgeMaxY = view.bounds.height - buttonsContainerView.frame.maxY
         
         if frame.minX < edgeMinX {
             finalCenter.x += (-frame.minX + edgeMinX)

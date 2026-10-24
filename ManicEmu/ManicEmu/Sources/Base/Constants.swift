@@ -42,7 +42,7 @@ extension _R {
         ///HomeTabBarSize 300x60
         static let HomeTabBarSize = CGSize(width: 300, height: ItemHeightLarge)
         /// 侧边视图宽度
-        static let SideMenuWidth = UIDevice.isPhone ? WindowSize.minDimension * 0.874 : 300
+        static var SideMenuWidth: CGFloat { min(300, WindowWidth * 0.874) }
         /// 游戏封面宽高比 默认1:1
         static func GameCoverRatio(gameType: GameType, ignoreForceSquare: Bool = false) -> CGFloat {
             if R.Style.GameCoverForceSquare && !ignoreForceSquare {

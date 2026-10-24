@@ -1670,6 +1670,18 @@
 		F9A3C32228B84AD391F34585 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 578E26D32FD41D9300A2749A /* NVActivityIndicatorView */; };
 		FDD0064DAC7645118F826ED7 /* Closures in Frameworks */ = {isa = PBXBuildFile; productRef = 578E231F2FD288C600A2749A /* Closures */; };
 		FFD8F5F4CE02425E8BA80296 /* mednafen.pce.libretro.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9408D7BF872544CFABE4D652 /* mednafen.pce.libretro.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		93FD9EE1BE284E49A4DA08DB /* AdaptiveGameLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478550FB09D82341764D5DA4 /* AdaptiveGameLayout.swift */; };
+		279FBB4E2C9CD99BCFF33793 /* AdaptiveGameLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478550FB09D82341764D5DA4 /* AdaptiveGameLayout.swift */; };
+		EA371D51232CAADEB4EED041 /* AdaptiveGameLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478550FB09D82341764D5DA4 /* AdaptiveGameLayout.swift */; };
+		D602C57C873C9131C6C950E2 /* AdaptiveSkinDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D764C51EEF393E9C73FF47 /* AdaptiveSkinDefinition.swift */; };
+		80E08C0861689262320102E3 /* AdaptiveSkinDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D764C51EEF393E9C73FF47 /* AdaptiveSkinDefinition.swift */; };
+		38B93B44F6294DDDCF26475E /* AdaptiveSkinDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D764C51EEF393E9C73FF47 /* AdaptiveSkinDefinition.swift */; };
+		D6E5616208DE44109244F003 /* AdaptiveSkinStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1146E98A9046576179A3AF6 /* AdaptiveSkinStore.swift */; };
+		D58EF977EAF8984737F5845A /* AdaptiveSkinStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1146E98A9046576179A3AF6 /* AdaptiveSkinStore.swift */; };
+		96B819CBC9247278D36E3B36 /* AdaptiveSkinStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1146E98A9046576179A3AF6 /* AdaptiveSkinStore.swift */; };
+		37E4E3E185024A8685A746A9 /* AdaptiveSkinFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1C2F97F25F3BB0D46AB7E /* AdaptiveSkinFactory.swift */; };
+		CB6ED599320978785FCB2500 /* AdaptiveSkinFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1C2F97F25F3BB0D46AB7E /* AdaptiveSkinFactory.swift */; };
+		2F7C16254011471903E67C1F /* AdaptiveSkinFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1C2F97F25F3BB0D46AB7E /* AdaptiveSkinFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -6730,7 +6742,7 @@
 		57E8A110304A4A1100000040 /* IdeviceFFI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IdeviceFFI.swift; path = ../StikJIT/Sources/IdeviceFFI.swift; sourceTree = SOURCE_ROOT; };
 		57E8A110304A4A1100000041 /* JITSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JITSession.swift; path = ../StikJIT/Sources/JITSession.swift; sourceTree = SOURCE_ROOT; };
 		57E8A110304A4A1100000042 /* ProcessInfo+TXM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ProcessInfo+TXM.swift"; path = "../StikJIT/Sources/ProcessInfo+TXM.swift"; sourceTree = SOURCE_ROOT; };
-		57E8A110304A4A1100000043 /* ScriptRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScriptRunner.swift; path = ../StikJIT/Sources/ScriptRunner.swift; sourceTree = SOURCE_ROOT; };
+		57E8A110304A4A1100000043 /* ScriptRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScriptRunner.swift; path = ../Vendor/StikJIT/ScriptRunner.swift; sourceTree = SOURCE_ROOT; };
 		57E8A110304A4A1100000044 /* StikJIT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StikJIT.swift; path = ../StikJIT/Sources/StikJIT.swift; sourceTree = SOURCE_ROOT; };
 		57E8A110304A4A1100000045 /* StikJITError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StikJITError.swift; path = ../StikJIT/Sources/StikJITError.swift; sourceTree = SOURCE_ROOT; };
 		57E8A110304A4A1100000046 /* SynchronousDDIDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SynchronousDDIDownloader.swift; path = ../StikJIT/Sources/SynchronousDDIDownloader.swift; sourceTree = SOURCE_ROOT; };
@@ -6839,6 +6851,10 @@
 		F0C500000000000000000106 /* FocusCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusCollectionView.swift; sourceTree = "<group>"; };
 		F0C500000000000000000107 /* FocusSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSystem.swift; sourceTree = "<group>"; };
 		F0C500000000000000000108 /* FocusSystem+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FocusSystem+UIViewController.swift"; sourceTree = "<group>"; };
+		478550FB09D82341764D5DA4 /* AdaptiveGameLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../Shared/AdaptiveGameLayout.swift"; sourceTree = SOURCE_ROOT; };
+		17D764C51EEF393E9C73FF47 /* AdaptiveSkinDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../Shared/AdaptiveSkinDefinition.swift"; sourceTree = SOURCE_ROOT; };
+		A1146E98A9046576179A3AF6 /* AdaptiveSkinStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../Shared/AdaptiveSkinStore.swift"; sourceTree = SOURCE_ROOT; };
+		FAD1C2F97F25F3BB0D46AB7E /* AdaptiveSkinFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManicEmu/Sources/Business/Play/AdaptiveSkinFactory.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -13219,6 +13235,10 @@
 		A5A001E624555A5F006E0F0E = {
 			isa = PBXGroup;
 			children = (
+				478550FB09D82341764D5DA4 /* AdaptiveGameLayout.swift */,
+				17D764C51EEF393E9C73FF47 /* AdaptiveSkinDefinition.swift */,
+				A1146E98A9046576179A3AF6 /* AdaptiveSkinStore.swift */,
+				FAD1C2F97F25F3BB0D46AB7E /* AdaptiveSkinFactory.swift */,
 				A5A001F124555A5F006E0F0E /* ManicEmu */,
 				57B591E42FD06473003C4235 /* ManicEmuTV */,
 				57C75ACA2FD571A10093A2B3 /* Libretro */,
@@ -13838,6 +13858,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				279FBB4E2C9CD99BCFF33793 /* AdaptiveGameLayout.swift in Sources */,
+				80E08C0861689262320102E3 /* AdaptiveSkinDefinition.swift in Sources */,
+				D58EF977EAF8984737F5845A /* AdaptiveSkinStore.swift in Sources */,
+				CB6ED599320978785FCB2500 /* AdaptiveSkinFactory.swift in Sources */,
 				C425CFE2F6744DD2B82FDB01 /* RuffleView.swift in Sources */,
 				4C03A073F6DB40669F022100 /* FLASH.swift in Sources */,
 				58D0423D007B462DB353AA16 /* WSC.swift in Sources */,
@@ -14308,6 +14332,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA371D51232CAADEB4EED041 /* AdaptiveGameLayout.swift in Sources */,
+				38B93B44F6294DDDCF26475E /* AdaptiveSkinDefinition.swift in Sources */,
+				96B819CBC9247278D36E3B36 /* AdaptiveSkinStore.swift in Sources */,
+				2F7C16254011471903E67C1F /* AdaptiveSkinFactory.swift in Sources */,
 				220A1FDAB02E4E41999363CA /* RuffleView.swift in Sources */,
 				2315CFACDCA546689D506EEB /* FLASH.swift in Sources */,
 				54CDF4E1512F4F639EE3CDC2 /* WSC.swift in Sources */,
@@ -14761,6 +14789,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93FD9EE1BE284E49A4DA08DB /* AdaptiveGameLayout.swift in Sources */,
+				D602C57C873C9131C6C950E2 /* AdaptiveSkinDefinition.swift in Sources */,
+				D6E5616208DE44109244F003 /* AdaptiveSkinStore.swift in Sources */,
+				37E4E3E185024A8685A746A9 /* AdaptiveSkinFactory.swift in Sources */,
 				E4DFA97292C840F29BC49ED5 /* RuffleView.swift in Sources */,
 				A0D929BA27CC4FE68A49BDAB /* FLASH.swift in Sources */,
 				AD7D0110DD684A0DA5505F08 /* WSC.swift in Sources */,

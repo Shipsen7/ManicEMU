@@ -71,10 +71,10 @@ extension UIDevice {
     }
     
     static var layoutStyle: LayoutStyle {
-        if UIDevice.current.userInterfaceIdiom == .phone {
+        if R.Size.WindowSize.width < 600 {
             return .iPhoneFullScreen
         }
-        let screenSize = UIScreen.main.bounds.size
+        let screenSize = UIWindow.applicationWindow?.windowScene?.screen.bounds.size ?? R.Size.WindowSize
         let appSize = R.Size.WindowSize
         let screenWidth = screenSize.width
         let appWidth = appSize.width
@@ -96,7 +96,7 @@ extension UIDevice {
     }
     
     static var isLandscape: Bool {
-        UIDevice.currentOrientation == .landscapeLeft || UIDevice.currentOrientation == .landscapeRight
+        R.Size.WindowSize.width > R.Size.WindowSize.height
     }
     
     static var isPortrait: Bool {
